@@ -539,7 +539,7 @@ Released by Maypop Inc, © 2012-2016, under the MIT License. */
 			  var choice = {
 				  "1" : "",
 				  "-1": "-",
-			  }			
+			  };
 			  // 1 is up, and -1 is down
 			  var ordered = true;
 			  var unique = originalindex[index].unique;
@@ -581,7 +581,8 @@ Released by Maypop Inc, © 2012-2016, under the MIT License. */
   var Results = {};
   Results["CheckMongoType"] = true;
 
-  Results["RowSchema"] = columns;
+  Results["RowSchema"] = {};
+  Results["RowSchema"]["columns"] = columns;
   if (Object.keys(tableindex).length) {
 	Results["TableIndex"] = tableindex;
   }

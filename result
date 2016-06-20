@@ -1,0 +1,27 @@
+MongoDB shell version: 3.3.5-54-g26b473e
+connecting to: test
+{
+	"CheckMongoType" : true,
+	"RowSchema" : {
+		"_id" : {
+			"type" : "Fixed",
+			"length" : 12
+		},
+		"name" : {
+			"type" : "StrZero"
+		},
+		"age" : {
+			"type" : "Sint32"
+		},
+		"$$" : {
+			"type" : "CarBin"
+		}
+	},
+	"TableIndex" : [
+		{
+			"fields" : "_id",
+			"ordered" : true,
+			"unique" : true
+		}
+	]
+}

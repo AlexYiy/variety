@@ -351,30 +351,52 @@ Released by Maypop Inc, © 2012-2016, under the MIT License. */
   var convertSchema = function(interimResultsstrc, documentsCount, nestedschemaset, interimResults) {
 	var getKeyType = function(type) {
 		var TypeToType = {
-			"Double"	:	"Float64",	
-			"String" 	:	"StrZero",
-			"Object"	:	"Nested",
-			"Array"		: 	"Nested",
-			"BinData"	:	"CarBin",
-			"undefined"	:	"",
 			"ObjectId"	:	"Fixed",
 			"Boolean"	:	"Uint08",
-			"Date"		:	"Sint64",
-			"Null"		:	"",
-			"Regex"		:	"TwoStrZero",
-			"DBPointer"	:	"",
-			"JavaScript"	:	"",
-			"Symbol"	:	"StrZero",
-			"JSWithScope"	:	"CarBin",	
 			"Number"	:	"Sint32",  // here should be modified next
-			"Timestamp"	:	"Sint64",
 			"NumberLong"	:	"Sint64",
+			"Double"	:	"Float64",	
+			"Date"		:	"Sint64",
+			"Timestamp"	:	"Sint64",
+			"BinData"	:	"CarBin",
+			"Array"		: 	"CarBin",
+			"Object"	:	"CarBin",
+			"Regex"		:	"TwoStrZero",
+			"String" 	:	"StrZero",
+			"undefined"	:	"Binary",
+			"Null"		:	"",
+			"DBPointer"	:	"StrZero",
+			"JavaScript"	:	"StrZero",
+			"Symbol"	:	"StrZero",
+			"JSWithScope"	:	"StrZero",	
 			"MinKey"	:	"",
 			"MaxKey"	:	""
 		};
 		return TypeToType[type];
 	}
-	
+
+	var getMongoType = function(type) {
+		var TypeToType = {
+			"ObjectId"	:	"oid",
+			"Boolean"	:	"bool",
+			"Number"	:	"int",
+			"NumberLong"	:	"long",
+			"Double"	:	"double",	
+			"Date"		:	"date",
+			"Timestamp"	:	"timestamp",
+			"BinData"	:	"bindata",
+			"Array"		: 	"array",
+			"Object"	:	"object",
+			"Regex"		:	"regex",
+			"String" 	:	"string",
+			"DBPointer"	:	"string",
+			"JavaScript"	:	"string",
+			"Symbol"	:	"string",
+			"JSWithScope"	:	"string",	
+		};
+		return TypeToType[type];
+	}
+
 	var columns = {};
 	var differfield = {};
 	var nestedindex = 1;
@@ -555,6 +577,7 @@ Released by Maypop Inc, © 2012-2016, under the MIT License. */
   // this is the result: RowSchema + TableIndex + NestedSchemaSet 
   // ========================================================================
   var Results = {};
+  Results["CheckMongoType"] = true;
 
   Results["RowSchema"] = columns;
   if (Object.keys(tableindex).length) {

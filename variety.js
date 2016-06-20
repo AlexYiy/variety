@@ -407,10 +407,10 @@ Released by Maypop Inc, © 2012-2016, under the MIT License. */
 			var tempv = value[key];
 			var type = Object.keys(tempv);
 			if(type == 'Object') {
-				pararesult["nested"][key] = {'type':getKeyType(type.toString())};
+				pararesult["nested"][key] = {'type':getKeyType(type.toString()), 'mongoType':getMongoType(type.toString())};
 				serializeCValue(tempv['Object'], pararesult["nested"][key]);
 			} else {
-				pararesult["nested"][key] = {'type':getKeyType(type.toString())};
+				pararesult["nested"][key] = {'type':getKeyType(type.toString()), 'mongoType':getMongoType(type.toString())};
 			}
 		}
 	}
@@ -422,14 +422,16 @@ Released by Maypop Inc, © 2012-2016, under the MIT License. */
 		if (entry.totalOccurrences === documentsCount) {
 		  	// all the records containe the field
 			if (typeKeys === "ObjectId") {
-				columns[key] = {'type': getKeyType(typeKeys), 'length': 12};
+				// columns[key] = {'type': getKeyType(typeKeys), 'length': 12};
+				columns[key] = {'type': getKeyType(typeKeys), 'length': 12, 'mongoType':getMongoType(typeKeys)};
 			} else if (typeKeys === "Object") {
 				serializeCValue(entry["value"]['Object'], nested);
 				var k = Object.keys(nested);
 				var nested = nested[k.toString()];
-				columns[key] = {'type': getKeyType(typeKeys), nested};
+				columns[key] = {'type': getKeyType(typeKeys), 'mongoType':getMongoType(typeKeys), nested};
 			} else {
-				columns[key] = {'type': getKeyType(typeKeys)};
+				// columns[key] = {'type': getKeyType(typeKeys)};
+				columns[key] = {'type': getKeyType(typeKeys), 'mongoType':getMongoType(typeKeys)};
 			}
 		} else {
 			// just some records containe the field

@@ -5,13 +5,16 @@ connecting to: test
 	"RowSchema" : {
 		"_id" : {
 			"type" : "Fixed",
-			"length" : 12
+			"length" : 12,
+			"mongoType" : "oid"
 		},
 		"name" : {
-			"type" : "StrZero"
+			"type" : "StrZero",
+			"mongoType" : "string"
 		},
-		"age" : {
-			"type" : "Sint32"
+		"bio" : {
+			"type" : "Uint08",
+			"mongoType" : "bool"
 		},
 		"$$" : {
 			"type" : "CarBin"
